@@ -11,16 +11,19 @@ class PessoaJuridica extends Pessoa {
     return true;
   }
 
-  String formataCnpj() {
-    String cnpj = super.doc.substring(0, 2) +
+  String formataCnpj([String doc = ""]) {
+    if (doc == "") {
+      doc = super.doc;
+    }
+    String cnpj = doc.substring(0, 2) +
         "." +
-        super.doc.substring(2, 5) +
+        doc.substring(2, 5) +
         "." +
-        super.doc.substring(5, 8) +
+        doc.substring(5, 8) +
         "/" +
-        super.doc.substring(8, 12) +
+        doc.substring(8, 12) +
         "-" +
-        super.doc.substring(12);
+        doc.substring(12);
     //11.941.838/0001-04
     return cnpj;
   }

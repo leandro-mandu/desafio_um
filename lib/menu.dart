@@ -60,9 +60,17 @@ Nome Fantasia: ${listaEmpresas[i].nome}
 Telefone: ${listaEmpresas[i].formataTelefone()}
 Endereço: ${listaEmpresas[i].endereco['logradouro']}, ${listaEmpresas[i].endereco['numero']}, ${listaEmpresas[i].endereco['bairro']}, ${listaEmpresas[i].endereco['complemento']}/${listaEmpresas[i].endereco['estado']}, ${listaEmpresas[i].endereco['CEP']}
 Sócio:
-CPF: 763.679.800-08
-Nome Completo: Mirella Kamilly Letícia Barbosa
-Endereço: Rua Ulisses Bueno, 175, Vila Rosa, Aparecida de Goiânia/GO, 74.935-870
+''');
+          if (listaEmpresas[i].docSocio.length == 14) {
+            print(
+                "CNPJ: " + mapSocios[listaEmpresas[i].docSocio].formataCnpj());
+          } else {
+            print("CPF: " + mapSocios[listaEmpresas[i].docSocio].formataCpf());
+          }
+
+          print('''
+Nome Completo: ${mapSocios[listaEmpresas[i].docSocio].nome}
+Endereço: ${mapSocios[listaEmpresas[i].docSocio].endereco['logradouro']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['numero']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['bairro']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['complemento']}/${mapSocios[listaEmpresas[i].docSocio].endereco['estado']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['CEP']}
 ''');
           break;
 //          opcao = input('CNPJ ou "0" para sair', int);

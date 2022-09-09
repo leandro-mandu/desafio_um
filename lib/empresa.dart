@@ -34,4 +34,6 @@ class Empresa extends PessoaJuridica {
     }
     return tel;
   }
+
+  String get docSocio => _docSocio;
 }

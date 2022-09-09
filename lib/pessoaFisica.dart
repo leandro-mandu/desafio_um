@@ -11,4 +11,19 @@ class PessoaFisica extends Pessoa {
     }
     return true;
   }
+
+  String formataCpf([String doc = ""]) {
+    if (doc == "") {
+      doc = super.doc;
+    }
+
+    String cpf = doc.substring(0, 3) +
+        "." +
+        doc.substring(3, 6) +
+        "." +
+        doc.substring(6, 9) +
+        "-" +
+        doc.substring(9);
+    return cpf;
+  }
 }
