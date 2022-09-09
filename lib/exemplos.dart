@@ -45,7 +45,7 @@ void carregarEmpresasTeste(List empresas, Map<String, dynamic> socios) {
     'complemento': 'após o 102',
     'bairro': 'Bairro Três',
     'estado': 'SP',
-    'CEP': '12345003'0
+    'CEP': '12345003'
   };
 
   socio = PessoaFisica('1234567803', 'Sócio Três', endereco);
