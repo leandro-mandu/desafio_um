@@ -59,8 +59,7 @@ Razão Social: ${listaEmpresas[i].razaoSocial}
 Nome Fantasia: ${listaEmpresas[i].nome}
 Telefone: ${listaEmpresas[i].formataTelefone()}
 Endereço: ${listaEmpresas[i].endereco['logradouro']}, ${listaEmpresas[i].endereco['numero']}, ${listaEmpresas[i].endereco['bairro']}, ${listaEmpresas[i].endereco['complemento']}/${listaEmpresas[i].endereco['estado']}, ${listaEmpresas[i].endereco['CEP']}
-Sócio:
-''');
+Sócio:''');
           if (listaEmpresas[i].docSocio.length == 14) {
             print(
                 "CNPJ: " + mapSocios[listaEmpresas[i].docSocio].formataCnpj());
