@@ -26,6 +26,7 @@ void menuPrincipal() {
         cadastrarEmpresa();
         break;
       case '2':
+        pesquisarEmpresa();
         break;
       case '3':
         break;
@@ -37,6 +38,42 @@ void menuPrincipal() {
         feedback = "OPCAO INVALIDA, TENTE NOVAMENTE!";
     }
   } while (opcao != '0');
+}
+
+void pesquisarEmpresa() {
+  limparTela();
+  print('''     ____PESQUISA DE EMPRESA____
+  ''');
+  String opcao = '';
+  while (opcao != '0') {
+    opcao = input('CNPJ ou "0" para sair', int);
+    if (opcao != '0') {
+      int i;
+      for (i = 0; i < listaEmpresas.length; i++) {
+        if (listaEmpresas[i].doc == opcao) {
+          print('''
+
+ID: ${listaEmpresas[i].id}
+CNPJ: ${listaEmpresas[i].formataCnpj()} Data Cadastro: ${listaEmpresas[i].dataCadastro}
+Razão Social: ${listaEmpresas[i].razaoSocial}
+Nome Fantasia: ${listaEmpresas[i].nome}
+Telefone: ${listaEmpresas[i].formataTelefone()}
+Endereço: ${listaEmpresas[i].endereco['logradouro']}, ${listaEmpresas[i].endereco['numero']}, ${listaEmpresas[i].endereco['bairro']}, ${listaEmpresas[i].endereco['complemento']}/${listaEmpresas[i].endereco['estado']}, ${listaEmpresas[i].endereco['CEP']}
+Sócio:
+CPF: 763.679.800-08
+Nome Completo: Mirella Kamilly Letícia Barbosa
+Endereço: Rua Ulisses Bueno, 175, Vila Rosa, Aparecida de Goiânia/GO, 74.935-870
+''');
+          break;
+//          opcao = input('CNPJ ou "0" para sair', int);
+        }
+      }
+      if (i == listaEmpresas.length) {
+        print("EPRESA NÃO ENCONTRADA!");
+        //      opcao = input('CNPJ ou "0" para sair', int);
+      }
+    }
+  }
 }
 
 void limparTela() {

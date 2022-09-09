@@ -1,7 +1,7 @@
 abstract class Pessoa {
   String _doc;
   String _nome;
-  Map endereco = <String, String>{};
+  Map _endereco = <String, String>{};
   /*{
     'logradouro': '',
     'numero': '',
@@ -11,11 +11,12 @@ abstract class Pessoa {
     'CEP': ''
   };
   */
-  Pessoa(this._doc, this._nome, this.endereco);
+  Pessoa(this._doc, this._nome, this._endereco);
   String get nome => _nome;
   void set nome(String nome) {
     _nome = nome;
   }
 
   String get doc => _doc;
+  Map get endereco => _endereco;
 }

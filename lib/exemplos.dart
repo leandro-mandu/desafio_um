@@ -50,7 +50,7 @@ void carregarEmpresasTeste(List empresas, Map<String, dynamic> socios) {
 
   socio = PessoaFisica('1234567803', 'Sócio Três', endereco);
   empresa = Empresa('12345678000103', 'Empresa Três', endereco, 'Três SA',
-      Uuid().v1(), '1310010003', DateTime.now(), '1234567803');
+      Uuid().v1(), '13910010003', DateTime.now(), '1234567803');
 
   socios.addAll({socio.doc: socio});
   empresas.add(empresa);
