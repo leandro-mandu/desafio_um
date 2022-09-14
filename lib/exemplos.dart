@@ -80,4 +80,69 @@ void carregarEmpresasTeste(List empresas, Map<String, dynamic> socios) {
 
   socios.addAll({socio.doc: socio});
   empresas.add(empresa);
+
+  endereco = <String, String>{
+    'logradouro': 'Rua Ulisses Bueno',
+    'numero': '175',
+    'complemento': 'Aparecida de Goiânia',
+    'bairro': 'Vila Rosa',
+    'estado': 'GO',
+    'CEP': '74935870'
+  };
+
+  socio =
+      PessoaFisica('76367980008', 'Mirella Kamilly Letícia Barbosa', endereco);
+  endereco = <String, String>{
+    'logradouro': 'Rua Tres',
+    'numero': '338',
+    'complemento': 'Piracicaba',
+    'bairro': 'Vila Industrial',
+    'estado': 'SP',
+    'CEP': '13412233'
+  };
+  empresa = Empresa(
+      '11941838000104',
+      'Pães e Doces',
+      endereco,
+      'Elisa e Flávia Pães e Doces ME',
+      'ca3e6c78-dae6-4629-b819-e5576c00f68b',
+      '19988380630',
+      DateTime.now(),
+      '76367980008');
+
+  socios.addAll({socio.doc: socio});
+  empresas.add(empresa);
+
+  endereco = <String, String>{
+    'logradouro': 'Rua Ângelo Alberto Nesti',
+    'numero': '639',
+    'complemento': 'Osasco',
+    'bairro': 'Bussocaba',
+    'estado': 'SP',
+    'CEP': '06053060'
+  };
+
+  socio = PessoaJuridica('87009263000140', 'Loc. Auto', endereco,
+      'Lavínia e Tereza Locações de Automóveis Ltda');
+
+  endereco = <String, String>{
+    'logradouro': 'Rua Domingos Vendemiati',
+    'numero': '154',
+    'complemento': 'Jundiaí',
+    'bairro': 'Parque Recanto do Parrilho',
+    'estado': 'SP',
+    'CEP': '13219051'
+  };
+  empresa = Empresa(
+      '92456516000163',
+      'Telas',
+      endereco,
+      'Arthur e Andreia Telas Ltda',
+      'fb7afcf0-2669-4e2b-8bd7-72d7456762b0',
+      '11995726906',
+      DateTime.now(),
+      '87009263000140');
+
+  socios.addAll({socio.doc: socio});
+  empresas.add(empresa);
 }

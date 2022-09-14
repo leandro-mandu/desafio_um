@@ -29,10 +29,13 @@ void menuPrincipal() {
         pesquisarEmpresa();
         break;
       case '3':
+        pesquisarEmpresa(true);
         break;
       case '4':
+        listarEmpresas();
         break;
       case '5':
+        excluirEmpresa();
         break;
       default:
         feedback = "OPCAO INVALIDA, TENTE NOVAMENTE!";
@@ -40,39 +43,99 @@ void menuPrincipal() {
   } while (opcao != '0');
 }
 
-void pesquisarEmpresa() {
+void listarEmpresas() {
+  listaEmpresas.sort((a, b) =>
+      a.razaoSocial.toUpperCase().compareTo(b.razaoSocial.toUpperCase()));
+  limparTela();
+  print('''     ____LISTA DE EMPRESAS____
+  ''');
+
+  listaEmpresas.forEach((e) {
+    print("ID: ${e.id} | Razão social: ${e.razaoSocial}");
+  });
+  print("Pressione enter para voltar ao menu inicial");
+  stdin.readLineSync();
+}
+
+void mostrarEmpresa(final empresa, final socio) {
+  print('''
+
+ID: ${empresa.id}
+CNPJ: ${empresa.formataCnpj()} Data Cadastro: ${empresa.dataCadastro}
+Razão Social: ${empresa.razaoSocial}
+Nome Fantasia: ${empresa.nome}
+Telefone: ${empresa.formataTelefone()}
+Endereço: ${empresa.endereco['logradouro']}, ${empresa.endereco['numero']}, ${empresa.endereco['bairro']}, ${empresa.endereco['complemento']}/${empresa.endereco['estado']}, ${empresa.endereco['CEP']}
+Sócio:''');
+  if (empresa.docSocio.length == 14) {
+    print("CNPJ: " + socio.formataCnpj());
+  } else {
+    print("CPF: " + socio.formataCpf());
+  }
+
+  print('''
+Nome Completo: ${socio.nome}
+Endereço: ${socio.endereco['logradouro']}, ${socio.endereco['numero']}, ${socio.endereco['bairro']}, ${socio.endereco['complemento']}/${socio.endereco['estado']}, ${socio.endereco['CEP']}
+''');
+}
+
+void pesquisarEmpresa([bool socio = false]) {
   limparTela();
   print('''     ____PESQUISA DE EMPRESA____
   ''');
   String opcao = '';
   while (opcao != '0') {
-    opcao = input('CNPJ ou "0" para sair', int);
+    if (socio) {
+      opcao = input('CNPJ ou CPF do sócio, ou "0" para sair', int);
+    } else {
+      opcao = input('CNPJ ou "0" para sair', int);
+    }
     if (opcao != '0') {
       int i;
       for (i = 0; i < listaEmpresas.length; i++) {
-        if (listaEmpresas[i].doc == opcao) {
-          print('''
-
-ID: ${listaEmpresas[i].id}
-CNPJ: ${listaEmpresas[i].formataCnpj()} Data Cadastro: ${listaEmpresas[i].dataCadastro}
-Razão Social: ${listaEmpresas[i].razaoSocial}
-Nome Fantasia: ${listaEmpresas[i].nome}
-Telefone: ${listaEmpresas[i].formataTelefone()}
-Endereço: ${listaEmpresas[i].endereco['logradouro']}, ${listaEmpresas[i].endereco['numero']}, ${listaEmpresas[i].endereco['bairro']}, ${listaEmpresas[i].endereco['complemento']}/${listaEmpresas[i].endereco['estado']}, ${listaEmpresas[i].endereco['CEP']}
-Sócio:''');
-          if (listaEmpresas[i].docSocio.length == 14) {
-            print(
-                "CNPJ: " + mapSocios[listaEmpresas[i].docSocio].formataCnpj());
-          } else {
-            print("CPF: " + mapSocios[listaEmpresas[i].docSocio].formataCpf());
-          }
-
-          print('''
-Nome Completo: ${mapSocios[listaEmpresas[i].docSocio].nome}
-Endereço: ${mapSocios[listaEmpresas[i].docSocio].endereco['logradouro']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['numero']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['bairro']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['complemento']}/${mapSocios[listaEmpresas[i].docSocio].endereco['estado']}, ${mapSocios[listaEmpresas[i].docSocio].endereco['CEP']}
-''');
+        if (!socio && listaEmpresas[i].doc == opcao) {
+          mostrarEmpresa(
+              listaEmpresas[i], mapSocios[listaEmpresas[i].docSocio]);
           break;
-//          opcao = input('CNPJ ou "0" para sair', int);
+        } else if (socio && listaEmpresas[i].docSocio == opcao) {
+          mostrarEmpresa(
+              listaEmpresas[i], mapSocios[listaEmpresas[i].docSocio]);
+          break;
+        }
+      }
+      if (i == listaEmpresas.length) {
+        print("EPRESA NÃO ENCONTRADA!");
+        //      opcao = input('CNPJ ou "0" para sair', int);
+      }
+    }
+  }
+}
+
+void excluirEmpresa() {
+  limparTela();
+  print('''     ____EXCLUIR EMPRESA____
+  ''');
+  String opcao = '';
+  while (opcao != '0') {
+    opcao = input('ID da empresa a ser excluida ou "0" para cancelar');
+    if (opcao != '0') {
+      int i;
+      for (i = 0; i < listaEmpresas.length; i++) {
+        if (listaEmpresas[i].id == opcao) {
+          print('''
+Deseja realmente excluir a empresa ${listaEmpresas[i].nome}?  
+1) Sim
+0) Não
+''');
+          opcao = stdin.readLineSync(encoding: utf8)!;
+          if (opcao == '1') {
+            listaEmpresas.removeAt(i);
+            print(
+                "EMPRESA EXCLUÍDA! Pressione enter para voltar ao menu inicial");
+            stdin.readLineSync();
+            return;
+          }
+          break;
         }
       }
       if (i == listaEmpresas.length) {

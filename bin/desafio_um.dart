@@ -10,12 +10,12 @@
 
 // O sistema ao ser executado deve oferecer as seguintes opções:
 
-// Cadastrar uma nova empresa;
-// Buscar Empresa cadastrada por CNPJ;
-// Buscar Empresa por CPF/CNPJ do Sócio;
-// Listar Empresas cadastradas em ordem alfabética (baseado na Razão Social);
-// Excluir uma empresa (por ID);
-// Sair.
+// Cadastrar uma nova empresa; OK
+// Buscar Empresa cadastrada por CNPJ; OK
+// Buscar Empresa por CPF/CNPJ do Sócio; OK
+// Listar Empresas cadastradas em ordem alfabética (baseado na Razão Social); OK
+// Excluir uma empresa (por ID); OK
+// Sair. OK
 // Requisitos:
 
 // Toda pessoa seja física ou jurídica, devem saber validar seu documento (CPF/CNPJ);
@@ -49,11 +49,24 @@
 // Razão Social: Lavínia e Tereza Locações de Automóveis Ltda
 // Nome Fantasia: Loc. Auto
 // Endereço: Rua Ângelo Alberto Nesti, 639, Bussocaba, Osasco/SP, 06.053-060
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:desafio_um/cadastros.dart';
 import 'package:desafio_um/exemplos.dart';
 import 'package:desafio_um/menu.dart';
 
 void main() {
-  carregarEmpresasTeste(listaEmpresas, mapSocios);
+  limparTela();
+  print('''
+Bem vindo!
+Deseja carregar algumas empresas como exemplo?
+S = sim
+N = Não
+''');
+  String e = stdin.readLineSync(encoding: utf8)!;
+  if (e == 's' || e == 'S') {
+    carregarEmpresasTeste(listaEmpresas, mapSocios);
+  }
   menuPrincipal();
 }
