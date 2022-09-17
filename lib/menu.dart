@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'cadastros.dart';
-
-//import 'package:uuid/uuid.dart';
+import 'generic_functions.dart';
 
 void menuPrincipal() {
   String opcao = "";
@@ -23,7 +22,7 @@ void menuPrincipal() {
     opcao = stdin.readLineSync(encoding: utf8)!;
     switch (opcao) {
       case '1':
-        cadastrarEmpresa();
+        feedback = cadastrarEmpresa();
         break;
       case '2':
         pesquisarEmpresa();
@@ -35,7 +34,7 @@ void menuPrincipal() {
         listarEmpresas();
         break;
       case '5':
-        excluirEmpresa();
+        feedback = excluirEmpresa();
         break;
       default:
         feedback = "OPCAO INVALIDA, TENTE NOVAMENTE!";
@@ -105,13 +104,12 @@ void pesquisarEmpresa([bool socio = false]) {
       }
       if (i == listaEmpresas.length) {
         print("EPRESA NÃO ENCONTRADA!");
-        //      opcao = input('CNPJ ou "0" para sair', int);
       }
     }
   }
 }
 
-void excluirEmpresa() {
+String excluirEmpresa() {
   limparTela();
   print('''     ____EXCLUIR EMPRESA____
   ''');
@@ -130,22 +128,15 @@ Deseja realmente excluir a empresa ${listaEmpresas[i].nome}?
           opcao = stdin.readLineSync(encoding: utf8)!;
           if (opcao == '1') {
             listaEmpresas.removeAt(i);
-            print(
-                "EMPRESA EXCLUÍDA! Pressione enter para voltar ao menu inicial");
-            stdin.readLineSync();
-            return;
+            return "EMPRESA EXCLUÍDA COM SUCESSO!";
           }
           break;
         }
       }
       if (i == listaEmpresas.length) {
-        print("EPRESA NÃO ENCONTRADA!");
-        //      opcao = input('CNPJ ou "0" para sair', int);
+        return "EMPRESA NÃO ENCONTRADA!";
       }
     }
   }
-}
-
-void limparTela() {
-  print("\x1B[2J\x1B[0;0H");
+  return "OPERAÇÃO CANCELADA!";
 }
