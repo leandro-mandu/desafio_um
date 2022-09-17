@@ -1,16 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:desafio_um/menu.dart';
 import 'package:uuid/uuid.dart';
 
 import 'empresa.dart';
 import 'pessoaFisica.dart';
 import 'pessoaJuridica.dart';
+import 'generic_functions.dart';
 
 final listaEmpresas = <Empresa>[];
 final mapSocios = <String, dynamic>{};
-cadastrarEmpresa() {
+
+String cadastrarEmpresa() {
   String doc;
   String razaoSocial;
   String nomeFantasia;
@@ -31,23 +29,7 @@ cadastrarEmpresa() {
   final empresa = Empresa(doc, nomeFantasia, endereco, razaoSocial, Uuid().v1(),
       telefone, DateTime.now(), docSocio);
   listaEmpresas.add(empresa);
-
-/*
-
-  String doc = input("CPF ou CNPJ do sócio vinculado:", int);
-  if (PessoaFisica().validarCpf(doc)) {
-    socio = PessoaFisica(id, doc, nome);
-  } else if (PessoaJuridica().validarCnpj(doc)) {
-    socio = PessoaJuridica(id, doc, nome);
-  }
-*/
-  //sócio: 1-pf, 2-pJ
-  //se 1 cadPj()
-  //senao se 2 cadPf()
-  //obj socio
-
-//cad empresa(socio)
-  //ID, Razão Social, Nome Fantasia, CNPJ, Endereço (Logradouro, Número, Complemento, Bairro, Estado e CEP), Telefone, Horário do Cadastro e Sócio.
+  return "EMPRESA CADASTRADA COM SUCESSO!";
 }
 
 String cadastrarSocio() {
@@ -73,14 +55,6 @@ String cadastrarSocio() {
         doc = "";
     }
   }
-
-/*
-    if (PessoaFisica().validarCpf(doc)) {
-    socio = PessoaFisica(id, doc, nome);
-  } else if (PessoaJuridica().validarCnpj(doc)) {
-    socio = PessoaJuridica(id, doc, nome);
-  }
-*/
 
   return doc;
 }
@@ -109,24 +83,10 @@ Map<String, String> cadastrarEndereco() {
 
     endereco['logradouro'] = input("Logradouro");
     endereco['numero'] = input("Número", int);
-    endereco['complemento'] = input("complemento");
+    endereco['complemento'] = input("complemento/cidade");
     endereco['bairro'] = input("bairro");
     endereco['estado'] = input("estado");
     endereco['CEP'] = input("cep", int);
   } while (erro != "");
   return endereco;
-}
-
-String input(String campo, [Type tipo = String]) {
-  String saida = "";
-  while (saida.trim() == "") {
-    print("Digite o(a) $campo:");
-    if (tipo == int) print("(apenas números)");
-    saida = stdin.readLineSync(encoding: utf8)!;
-    if (tipo == int && int.tryParse(saida) == null) {
-      print("POR FAVOR, DIGITE UM NÚMERO VÁLIDO");
-      saida = "";
-    }
-  }
-  return saida.trim();
 }

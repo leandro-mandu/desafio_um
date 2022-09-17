@@ -55,6 +55,7 @@ import 'dart:io';
 import 'package:desafio_um/cadastros.dart';
 import 'package:desafio_um/exemplos.dart';
 import 'package:desafio_um/menu.dart';
+import 'package:desafio_um/generic_functions.dart';
 
 void main() {
   limparTela();
